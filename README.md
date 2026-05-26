@@ -17,10 +17,12 @@ START_HERE_FOR_TEAMMATE.md
 1. 이 GitHub 페이지에서 초록색 `Code` 버튼을 누릅니다.
 2. `Download ZIP`을 누릅니다.
 3. ZIP 파일을 풉니다.
-4. `CREATE_CREDENTIALS_STEP_BY_STEP.md`를 보고 `credentials.json`을 만듭니다.
-5. `credentials.json`을 이 도구 폴더에 넣습니다.
-6. `run_import_wizard.bat`를 더블클릭합니다.
-7. 화면 메뉴에서 순서대로 실행합니다.
+4. 압축 푼 폴더 안에 `받은편지`, `보낸편지` 폴더를 만듭니다.
+5. 받은메일 EML은 `받은편지`, 보낸메일 EML은 `보낸편지`에 넣습니다.
+6. `CREATE_CREDENTIALS_STEP_BY_STEP.md`를 보고 `credentials.json`을 만듭니다.
+7. `credentials.json`을 이 도구 폴더에 넣습니다.
+8. Claude Code를 쓸 수 있으면 `START_HERE_FOR_TEAMMATE.md`의 붙여넣기 문장을 Claude Code에 줍니다.
+9. Claude Code 없이 직접 할 경우 `run_import_wizard.bat`를 더블클릭합니다.
 
 권장 순서:
 
@@ -42,14 +44,27 @@ Gmail에서 10개 확인
 - 중복 파일은 SHA256 기준으로 다시 넣지 않습니다.
 - 깨진 Cafe24 헤더는 import 직전에만 임시 보정합니다.
 
+## 권장 폴더 구조
+
+```text
+gmail-eml-import
+├─ 받은편지
+├─ 보낸편지
+├─ credentials.json
+├─ import_eml.py
+├─ requirements.txt
+└─ run_import_wizard.bat
+```
+
 ## 준비물
 
 ### 1. EML 백업 폴더
 
-예:
+권장:
 
 ```text
-C:\Users\내이름\email-archive\eml
+받은메일 EML → 받은편지 폴더
+보낸메일 EML → 보낸편지 폴더
 ```
 
 받은메일과 보낸메일 폴더가 따로 있으면 각각 따로 실행하면 됩니다.

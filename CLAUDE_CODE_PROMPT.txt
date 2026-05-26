@@ -1,0 +1,25 @@
+나는 개발을 잘 모릅니다.
+이 폴더의 START_HERE_FOR_TEAMMATE.md와 README.md를 읽고,
+내 백업 EML을 Gmail로 import해 주세요.
+
+폴더 구조는 다음과 같습니다.
+- 받은메일 EML: ./받은편지
+- 보낸메일 EML: ./보낸편지
+- Gmail OAuth 파일: ./credentials.json
+
+반드시 이 순서로 진행해 주세요.
+1. credentials.json 존재 여부 확인
+2. 받은편지 폴더 dry-run
+3. 보낸편지 폴더 dry-run
+4. 받은편지 sample 10개만 Gmail로 import
+5. 내가 Gmail에서 10개 확인할 때까지 멈추기
+6. 내가 OK하면 받은편지 전체 import
+7. 내가 OK하면 보낸편지 전체 import
+8. timeout이나 누락이 있으면 재시도
+9. 마지막에 final_missing_imports.csv 기준으로 누락 0개인지 확인
+
+중요:
+- 원본 EML 파일은 수정, 삭제, 이동, 이름 변경하지 마세요.
+- token.json은 절대 공유하지 마세요.
+- full import는 내가 OK하기 전에는 실행하지 마세요.
+- OAuth 승인 화면이 뜨면 내가 직접 계정 확인 후 승인하겠습니다.
