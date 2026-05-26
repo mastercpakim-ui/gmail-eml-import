@@ -6,12 +6,21 @@
 
 ## 제일 짧은 사용법
 
+처음 하는 사람은 아래 파일부터 보세요.
+
+```text
+START_HERE_FOR_TEAMMATE.md
+```
+
+정말 짧게 쓰면:
+
 1. 이 GitHub 페이지에서 초록색 `Code` 버튼을 누릅니다.
 2. `Download ZIP`을 누릅니다.
 3. ZIP 파일을 풉니다.
-4. 폴더 안에 `credentials.json` 파일을 넣습니다.
-5. `run_import_wizard.bat`를 더블클릭합니다.
-6. 화면 메뉴에서 순서대로 실행합니다.
+4. `CREATE_CREDENTIALS_STEP_BY_STEP.md`를 보고 `credentials.json`을 만듭니다.
+5. `credentials.json`을 이 도구 폴더에 넣습니다.
+6. `run_import_wizard.bat`를 더블클릭합니다.
+7. 화면 메뉴에서 순서대로 실행합니다.
 
 권장 순서:
 
@@ -65,19 +74,11 @@ credentials.json
 
 ## Google Cloud에서 credentials.json 만들기
 
-Google Cloud 화면은 자주 바뀌어서, 막히면 도움을 요청하세요.
+자세한 화면별 안내는 아래 파일에 있습니다.
 
-대략 순서:
-
-1. Google Cloud Console 접속
-2. 프로젝트 생성
-3. Gmail API 사용 설정
-4. OAuth 동의 화면 생성
-5. OAuth Client ID 생성
-6. Application type은 `Desktop app`
-7. JSON 다운로드
-8. 파일 이름을 `credentials.json`으로 변경
-9. 이 도구 폴더에 넣기
+```text
+CREATE_CREDENTIALS_STEP_BY_STEP.md
+```
 
 ## 실행 화면에서 뭘 고르면 되나요?
 
