@@ -1,6 +1,6 @@
 # Gmail EML Import
 
-백업받은 `.eml` 파일을 Gmail로 가져오는 도구입니다. (Claude Code 전용)
+백업받은 `.eml` 파일을 Gmail로 가져오는 도구입니다. (Claude Code · Codex 등 AI 코딩 에이전트 전용)
 
 원본 메일의 날짜·첨부파일·발신자/수신자·본문을 그대로 보존하며,
 이미 가져온 메일은 자동으로 건너뜁니다.
@@ -20,7 +20,7 @@ EML백업/
 
 ## 사용법
 
-Claude Code에 아래 문장을 붙여넣으세요. (경로는 본인 것으로 바꾸세요.)
+Claude Code · Codex 등 AI 코딩 에이전트에 아래 문장을 붙여넣으세요. (경로는 본인 것으로 바꾸세요.)
 
 ```text
 https://github.com/mastercpakim-ui/gmail-eml-import
@@ -29,7 +29,7 @@ https://github.com/mastercpakim-ui/gmail-eml-import
 credentials.json은 내가 만들게.
 ```
 
-그러면 Claude Code가 알아서 진행합니다.
+그러면 에이전트가 알아서 진행합니다.
 
 1. 코드와 라이브러리 준비
 2. credentials.json 만드는 법 안내
@@ -42,7 +42,7 @@ credentials.json은 내가 만들게.
 
 Gmail 접근을 허가하는 파일입니다.
 [CREATE_CREDENTIALS_STEP_BY_STEP.md](CREATE_CREDENTIALS_STEP_BY_STEP.md) 를 보고 만드세요.
-(Claude Code가 이 과정도 함께 안내합니다.)
+(에이전트가 이 과정도 함께 안내합니다.)
 
 ## 안전
 
