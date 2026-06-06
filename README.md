@@ -1,152 +1,51 @@
-# Gmail EML 가져오기 도구
+# Gmail EML Import
 
-백업받은 `.eml` 파일을 새 Gmail / Google Workspace Gmail 계정으로 가져오는 도구입니다.
+백업받은 `.eml` 파일을 Gmail로 가져오는 도구입니다. (Claude Code 전용)
 
-개발을 모르는 사람도 쓰도록 만든 버전입니다.
+원본 메일의 날짜·첨부파일·발신자/수신자·본문을 그대로 보존하며,
+이미 가져온 메일은 자동으로 건너뜁니다.
 
-## 제일 짧은 사용법
+## 준비
 
-처음 하는 사람은 아래 파일부터 보세요.
-
-```text
-START_HERE_FOR_TEAMMATE.md
-```
-
-정말 짧게 쓰면:
-
-1. 이 GitHub 페이지에서 초록색 `Code` 버튼을 누릅니다.
-2. `Download ZIP`을 누릅니다.
-3. ZIP 파일을 풉니다.
-4. 압축 푼 폴더 안에 `받은편지`, `보낸편지` 폴더를 만듭니다.
-5. 받은메일 EML은 `받은편지`, 보낸메일 EML은 `보낸편지`에 넣습니다.
-6. `CREATE_CREDENTIALS_STEP_BY_STEP.md`를 보고 `credentials.json`을 만듭니다.
-7. `credentials.json`을 이 도구 폴더에 넣습니다.
-8. Claude Code를 쓸 수 있으면 `START_HERE_FOR_TEAMMATE.md`의 붙여넣기 문장을 Claude Code에 줍니다.
-9. Claude Code 없이 직접 할 경우 `run_import_wizard.bat`를 더블클릭합니다.
-
-권장 순서:
+EML 백업을 아래처럼 두 폴더로 나눠 둡니다.
 
 ```text
-1. Dry-run
-2. Sample
-Gmail에서 10개 확인
-3. Full Inbox
-4. Full Sent
+EML백업/
+├─ 받은편지/   ← 받은메일 .eml 파일
+└─ 보낸편지/   ← 보낸메일 .eml 파일
 ```
 
-## 이 도구가 하는 일
+메일 백업은 보통 이미 받은/보낸이 나뉘어 있습니다.
+섞여 있으면 폴더 2개로 나눠 주세요.
 
-- 원본 EML 파일을 읽어서 Gmail API로 가져옵니다.
-- SMTP를 쓰지 않습니다.
-- Gmail API `users.messages.import`를 우선 사용합니다.
-- 원본 메일 날짜와 첨부파일을 최대한 보존합니다.
-- 원본 EML 파일은 수정, 삭제, 이동, 이름 변경하지 않습니다.
-- 중복 파일은 SHA256 기준으로 다시 넣지 않습니다.
-- 깨진 Cafe24 헤더는 import 직전에만 임시 보정합니다.
+## 사용법
 
-## 권장 폴더 구조
+Claude Code에 아래 문장을 붙여넣으세요. (경로는 본인 것으로 바꾸세요.)
 
 ```text
-gmail-eml-import
-├─ 받은편지
-├─ 보낸편지
-├─ credentials.json
-├─ import_eml.py
-├─ requirements.txt
-└─ run_import_wizard.bat
+https://github.com/mastercpakim-ui/gmail-eml-import
+이 repo 읽고 내 백업 메일을 Gmail로 옮겨줘.
+백업 경로는 C:\Users\내이름\EML백업 이고, 받은편지/보낸편지로 나뉘어 있어.
+credentials.json은 내가 만들게.
 ```
 
-## 준비물
+그러면 Claude Code가 알아서 진행합니다.
 
-### 1. EML 백업 폴더
+1. 코드와 라이브러리 준비
+2. credentials.json 만드는 법 안내
+3. dry-run (Gmail에 넣지 않고 검사)
+4. 받은편지 10개만 테스트 import
+5. 사용자가 Gmail에서 직접 확인할 때까지 멈춤
+6. OK하면 받은편지 전체 → 보낸편지 전체 import
 
-권장:
+## 직접 할 일 하나: credentials.json
 
-```text
-받은메일 EML → 받은편지 폴더
-보낸메일 EML → 보낸편지 폴더
-```
+Gmail 접근을 허가하는 파일입니다.
+[CREATE_CREDENTIALS_STEP_BY_STEP.md](CREATE_CREDENTIALS_STEP_BY_STEP.md) 를 보고 만드세요.
+(Claude Code가 이 과정도 함께 안내합니다.)
 
-받은메일과 보낸메일 폴더가 따로 있으면 각각 따로 실행하면 됩니다.
+## 안전
 
-### 2. credentials.json
-
-Google Cloud에서 Gmail API용 Desktop OAuth 파일을 받아야 합니다.
-
-파일 이름은 반드시 아래처럼 바꿉니다.
-
-```text
-credentials.json
-```
-
-그리고 `run_import_wizard.bat`와 같은 폴더에 넣습니다.
-
-중요:
-
-- `credentials.json`은 GitHub에 올리지 마세요.
-- `token.json`은 절대 남에게 보내지 마세요.
-- `token.json`은 실행 후 자동으로 생기는 본인 Gmail 접근 토큰입니다.
-
-## Google Cloud에서 credentials.json 만들기
-
-자세한 화면별 안내는 아래 파일에 있습니다.
-
-```text
-CREATE_CREDENTIALS_STEP_BY_STEP.md
-```
-
-## 실행 화면에서 뭘 고르면 되나요?
-
-`run_import_wizard.bat`를 더블클릭하면 메뉴가 나옵니다.
-
-### 1. Dry-run
-
-Gmail에 아무것도 넣지 않고 EML 파일을 검사합니다.
-
-먼저 반드시 이것부터 하세요.
-
-### 2. Sample
-
-Gmail에 10개만 테스트로 넣습니다.
-
-브라우저에서 Google 로그인/승인 화면이 뜨면 본인 계정이 맞는지 확인하고 직접 승인하세요.
-
-Gmail에서 확인할 것:
-
-- `Inbox-eml import` 라벨이 생겼는지
-- 메일 10개가 보이는지
-- 날짜가 맞는지
-- 첨부파일이 열리는지
-- 한글 제목, 본문, 파일명이 깨지지 않는지
-- Gmail 검색으로 찾을 수 있는지
-
-### 3. Full Inbox
-
-받은메일 EML 폴더 전체를 `Inbox-eml import` 라벨로 가져옵니다.
-
-### 4. Full Sent
-
-보낸메일 EML 폴더 전체를 `Sent-eml import` 라벨로 가져옵니다.
-
-## 문제가 생기면
-
-아래 파일을 보내면 확인할 수 있습니다.
-
-```text
-logs\dry_run_report.csv
-logs\failed.csv
-logs\final_missing_imports.csv
-```
-
-절대 보내면 안 되는 파일:
-
-```text
-token.json
-credentials.json
-```
-
-## 보안 메모
-
-이 도구는 로컬 PC에서 실행됩니다.
-
-메일 데이터와 OAuth 토큰을 외부 서버로 보내지 않습니다.
+- 원본 EML 파일은 수정·삭제·이동·이름변경하지 않습니다.
+- 같은 메일은 SHA256 기준으로 중복 import하지 않습니다.
+- `credentials.json`, `token.json`은 절대 남에게 보내지 마세요.
