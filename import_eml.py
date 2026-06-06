@@ -20,9 +20,9 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
 
-DEFAULT_SOURCE_DIR = "/mnt/c/Users/wisdo/email-archive/eml"
-DEFAULT_SAMPLE_LABEL = "Imported_Test/Cafe24_EML"
-DEFAULT_FULL_LABEL = "Imported/Cafe24_Webmail"
+DEFAULT_SOURCE_DIR = "."
+DEFAULT_SAMPLE_LABEL = "Imported_Test/eml-import"
+DEFAULT_FULL_LABEL = "Imported/eml-import"
 SCOPES = ["https://www.googleapis.com/auth/gmail.modify"]
 CSV_ENCODING = "utf-8-sig"
 
@@ -530,3 +530,4 @@ class FakeGmailService:
 
 if __name__ == "__main__":
     sys.exit(main())
+
